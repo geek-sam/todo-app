@@ -1,38 +1,233 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Roboto:wght@400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: aliceblue;
+  font-family: "Inter", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 1680px;
+  margin: auto;
+  height: 100vh;
+}
+
+.left-box {
+  width: 20%;
+  padding: 20px;
+  position: relative;
+}
+.heading {
+  font-size: 20px;
+  color: #345ade;
+  font-family: "Roboto", sans-serif;
+}
+.list-title {
+  padding: 20px 0 10px 0;
+  color: #333;
+}
+.search {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.search-ico,
+.plus {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+#search,
+#new-task,
+.new-list {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #3459de7e;
+  border-radius: 5px;
+  outline: none;
+
+  transition: border-bottom 150ms ease-in;
+}
+#search:focus,
+#new-task:focus,
+.new-list:focus {
+  border-bottom-color: #3459de7e;
+  border-bottom-width: 3px;
+}
+#search:focus::placeholder,
+#new-task:focus::placeholder,
+.new-list:focus::placeholder {
+  opacity: 0.5;
+}
+
+ul {
+  margin-top: 1rem;
+  list-style: none;
+}
+li {
+  padding: 8px 10px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+}
+li:hover {
+  background: #3459de7e;
+  cursor: pointer;
+}
+.active-task {
+  background: #3459de7e;
+}
+
+.right-box {
+  width: 80%;
+  padding: 40px 50px;
+  background-image: linear-gradient(rgba(61, 61, 61, 0.25), rgba(0, 0, 0, 0.25)),
+    url(img/bg-1.jpg);
+  height: 100%;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px 0 0 0;
+}
+.task-title {
+  width: 4em;
+  color: #fcfafa;
+  font-family: "Roboto", sans-serif;
+}
+.header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+}
+.controls i {
+  color: #fff;
+  background: #333;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+form {
+  position: absolute;
+  bottom: 30px;
+  width: 87%;
 }
 
-.App-link {
-  color: #61dafb;
+p {
+  color: #eee;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-container {
+  position: relative;
+  height: 80%;
+  margin-top: 2.5rem;
+  overflow: hidden;
 }
+.task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background: #00000050;
+  padding: 15px 25px;
+  color: #eee;
+  border-radius: 8px;
+  margin-bottom: 3px;
+}
+.task i {
+  cursor: pointer;
+}
+.task-text{
+    display: flex;
+    align-items: center;
+}
+[type="checkbox"] {
+  /* opacity: 0;
+  position: absolute; */
+  height: 14px;
+  width: 14px;
+  margin-right: 15px;
+}
+.task label {
+  display: flex;
+  align-items: center;
+}
+
+.task .task-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40px;
+}
+
+.todo-btn{
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+.complete{
+    text-decoration: line-through #d24c58;
+    opacity: 0.75;
+}
+
+.selected{
+    background:#9ffaf550;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .custom-checkbox {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  cursor: pointer;
+  border: 2px solid #fff;
+  margin-right: 1em;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+.task:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+  transform: scale(1.2);
+}
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: #345ade;
+  box-shadow: inset 0 0 0px 1px #888;
+} */
+/* [type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  opacity: 0.75;
+} */
+
