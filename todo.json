@@ -1,5 +1,5 @@
-{
-  "tasks": [
+
+   [
     {
       "id": 1,
       "name": "Work",
@@ -10,8 +10,9 @@
           "title": "delectus aut autem",
           "completed": false
         }
-      ]
+      ],
+      "completed": true
     }
-  ],
-  "completed-tasks": []
-}
+  ]
+
+

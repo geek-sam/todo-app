@@ -1,10 +1,13 @@
-import React from 'react'
+import React from "react";
 
 function TaskGroup(props) {
-    const {listItem, onClick} = props
-  return (
-    <li onClick={onClick}>{listItem}</li>
-  )
+  const { listItem, onClick, isActive} = props;
+  return <li 
+  className={`${isActive?"active-task":null}`}
+  onClick={onClick} 
+  >
+    {listItem}
+  </li>;
 }
 
 export default TaskGroup;

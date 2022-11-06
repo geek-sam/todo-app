@@ -1,19 +1,21 @@
-import React from 'react'
+import React from "react";
 
 function Search(props) {
-    
-    const {children, placeholderTxt} = props
-    return (
-        <div className="search">
-            <input
-                type="search"
-                name="Search"
-                id="search"
-                placeholder={placeholderTxt}
-            />
-            {children}
-        </div>
-    )
+  const { children, placeholderTxt} = props;
+  return (
+    <div className="search">
+      <input
+        type="search"
+        name="Search"
+        id="search"
+        placeholder={placeholderTxt}
+        
+      />
+      {children}
+
+      
+    </div>
+  );
 }
 
-export default Search
+export default Search;

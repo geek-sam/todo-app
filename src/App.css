@@ -97,7 +97,7 @@ li:hover {
   border-radius: 10px 0 0 0;
 }
 .task-title {
-  width: 4em;
+  width: 6.5em;
   color: #fcfafa;
   font-family: "Roboto", sans-serif;
 }
@@ -182,8 +182,31 @@ p {
     background:#9ffaf550;
 }
 
-
-
+.not-selected{
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  background-color: #0bbdd8;
+}
+.not-selected p{
+  color: #ffffff;
+  margin-top: 40px;
+  text-align: center;
+}
+.not-selected p a{
+  color: #eee;
+}
+.filter-data{
+  display: flex;
+  position: absolute;
+  color: #333;
+  z-index: 10;
+  padding: 20px;
+  /* background: #000; */
+}
 
 
 

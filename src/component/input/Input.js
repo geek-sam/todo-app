@@ -1,10 +1,7 @@
-// import React, { Children } from 'react'
 import React from "react";
 
 function input(props) {
-
-  const { children, classNameTxt, typeTxt, idName,...rest } = props;
-  // console.log(rest)
+  const { children, classNameTxt, typeTxt, idName, ...rest } = props;
   return (
     <form className="input-field" action="">
       <input
@@ -16,7 +13,7 @@ function input(props) {
       />
       {children}
     </form>
-  )
+  );
 }
 
-export default input    
+export default input;

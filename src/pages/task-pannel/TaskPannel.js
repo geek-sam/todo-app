@@ -7,25 +7,43 @@ function TaskPannel(props) {
   const { lists, setLists, selectedListIndex } = props;
 
   const [taskName, setTaskName] = useState("");
-  const [tasks, setTasks] = useState([]);
   let [selectedTask, setSelectedTask] = useState([]);
 
-  const handleSetTask = (e) => {
-    e.preventDefault();
-    if (!taskName) return;
-    setTasks((prev) => {
-      const temp = [...prev];
-      temp.push({
-        id: Date.now(),
-        title: taskName,
-        completed: false,
-      });
+  const handleMarkDoneSelected = () => {
+    // access the list of all task
+    // then access the selected tasks
+    setLists((prev) => {
+      const temp = JSON.parse(JSON.stringify(prev));
+      for (
+        let index = 0;
+        index < temp[selectedListIndex].todos.length;
+        index++
+      ) {
+        if (selectedTask.includes(index))
+          temp[selectedListIndex].todos[index].completed = true;
+      }
       return temp;
     });
-
-    setTaskName("");
   };
-  // console.log(tasks);
+
+  const handleDeleteSelected = () => {
+    const arr = [];
+    console.log(lists[selectedListIndex].todos.length);
+    for (
+      let index = 0;
+      index < lists[selectedListIndex].todos.length;
+      index++
+    ) {
+      const element = lists[selectedListIndex].todos[index];
+      if (!selectedTask.includes(index)) arr.push({ ...element });
+    }
+    setSelectedTask([]);
+    setLists((prev) => {
+      const temp = JSON.parse(JSON.stringify(prev));
+      temp[selectedListIndex].todos = arr;
+      return temp;
+    });
+  };
 
   const handleSetList = (e) => {
     e.preventDefault();
@@ -36,54 +54,44 @@ function TaskPannel(props) {
         id: Date.now(),
         title: taskName,
         completed: false,
-      })
-      return temp
-    })
-
-    setTaskName("");
-  }
-
-  const handleSelectedTask = (index) => {
-    setSelectedTask((prev) => {
-      const temp = [...prev];
-      if (temp.includes(index)) {
-        temp.splice(temp.findIndex((element) => element === index), 1)
-      }
-      else {
-        temp.push(index);
-      }
-
+      });
       return temp;
     });
-  }
+    setTaskName("");
+  };
 
   const handleCompletedTask = (index) => {
     setLists((prev) => {
       const temp = JSON.parse(JSON.stringify(prev));
-      temp[selectedListIndex].todos[index].completed = !temp[selectedListIndex].todos[index].completed;
+      temp[selectedListIndex].todos[index].completed =
+        !temp[selectedListIndex].todos[index].completed;
       return temp;
     });
   };
   const handleDeletedTask = (index) => {
-
     setLists((prev) => {
-      const temp = JSON.parse(JSON.stringify(prev));//deep copy
+      const temp = JSON.parse(JSON.stringify(prev)); //deep copy
       temp[selectedListIndex].todos.splice(index, 1);
       return temp;
     });
   };
-
 
   return (
     <div className="todo-section right-box">
       <Header
         taskTotal={lists[selectedListIndex].todos.length}
         selectedTask={selectedTask}
-        listName={(lists.length > 0) ? lists[selectedListIndex] && lists[selectedListIndex].name : ""}
-      //&& -> short-circuit evaluation
+        setLists={setLists}
+        listName={
+          lists.length > 0
+            ? lists[selectedListIndex] && lists[selectedListIndex].name
+            : ""
+        } //&& -> short-circuit evaluation
+        handleCompletedTask={handleCompletedTask}
+        selectedListIndex={selectedListIndex}
+        handleDeleteSelected={handleDeleteSelected}
+        handleMarkDoneSelected={handleMarkDoneSelected}
       />
-
-
 
       <div className="task-container">
         {lists[selectedListIndex].todos.map((element, index) => {
@@ -94,10 +102,10 @@ function TaskPannel(props) {
               forTxt={"task-" + index}
               index={index}
               element={element}
+              selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
               handleDeletedTask={handleDeletedTask}
               handleCompletedTask={handleCompletedTask}
-              handleSelectedTask={handleSelectedTask}
             />
           );
         })}

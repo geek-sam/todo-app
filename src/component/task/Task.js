@@ -2,36 +2,37 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 
 function Task(props) {
-  const { forTxt, index, element, setSelectedTask, handleDeletedTask, handleCompletedTask, handleSelectedTask} =
-    props;
+  const {
+    forTxt,
+    index,
+    element,
+    selectedTask,
+    setSelectedTask,
+    handleDeletedTask,
+    handleCompletedTask,
+  } = props;
   const [isSelected, setIsSelected] = useState();
 
-  // const handleSelected = (event) => {
-  //   console.log(index)
-  //   setIsSelected(!isSelected);
-  //   const val = event.target.value
-  //   if(isSelected){
-  //     setSelectedTask((prev) => {
-  //       const temp = [...prev];
-  //       temp.push(index);
-  //       // console.log(temp);
-  //       return temp;
-  //     });
-  //   }
-  //   else{
-  //     console.log(selectedTask)
-  //     setSelectedTask(selectedTask.filter((e) => {
-  //       return (e !== val)
-  //     }));
-  //   }
-  // };
+  const handleSelectedTask = () => {
+    setIsSelected(!isSelected);
+    setSelectedTask((prev) => {
+      const temp = [...prev];
+      if (temp.includes(index)) {
+        temp.splice(
+          temp.findIndex((element) => element === index),
+          1
+        );
+      } else {
+        temp.push(index);
+      }
+      return temp;
+    });
+  };
 
-  
-  // useEffect(()=>{
-  //   console.log(selectedTask)
-  // },[selectedTask])
+  useEffect(() => {
+    console.log(selectedTask);
+  }, [selectedTask]);
 
-  
   return (
     <div className={`task ${isSelected ? "selected" : ""}`}>
       <div className="task-text">
@@ -40,7 +41,7 @@ function Task(props) {
           name={forTxt}
           id={forTxt}
           value={index}
-          onChange={()=>{handleSelectedTask(index)}}
+          onChange={handleSelectedTask}
         />
         <label htmlFor={forTxt} className={element.completed ? "complete" : ""}>
           {element.title}
@@ -52,13 +53,17 @@ function Task(props) {
             className="fa-solid fa-check"
             aria-hidden="true"
             style={{ paddingTop: 2 }}
-            onClick={()=>{handleCompletedTask(index) }}
+            onClick={() => {
+              handleCompletedTask(index);
+            }}
           />
         </button>
-        {/* <button className="todo-btn" >
-          <i className="fa-solid fa-pen-to-square" />
-        </button> */}
-        <button className="todo-btn" onClick={()=>{handleDeletedTask(index)}}>
+        <button
+          className="todo-btn"
+          onClick={() => {
+            handleDeletedTask(index);
+          }}
+        >
           <i className="fa-solid fa-trash" />
         </button>
       </div>
